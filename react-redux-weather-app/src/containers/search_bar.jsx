@@ -14,8 +14,8 @@ export default class SearchBar extends Component {
     });
   };
 
-  clearInput = e => {
-    e.preventDefault();
+  clearInput = event => {
+    event.preventDefault();
     this.setState({ formInput: "" });
   };
 
