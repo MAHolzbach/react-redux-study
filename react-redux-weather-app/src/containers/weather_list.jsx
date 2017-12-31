@@ -9,7 +9,8 @@ class WeatherList extends Component {
       cityData.forecast.simpleforecast.forecastday[0].high.fahrenheit;
     return (
       <tr>
-        <td>{cityData.city}</td>
+        {/* <td>{cityData.city}</td> */}
+        <td>{cityData.meta.city}</td>
         <td>{conditions}</td>
         <td>{fHigh}</td>
       </tr>
@@ -21,12 +22,13 @@ class WeatherList extends Component {
         <thead>
           <tr>
             <th>City</th>
-            <th>Temperature</th>
-            <th>Pressure</th>
+            <th>Conditions</th>
+            <th>High (F)</th>
             <th>Humidity</th>
           </tr>
         </thead>
-        <tbody>{this.props.weather.map(this.renderWeather)}</tbody>
+        {/* <tbody>{this.props.weather.map(this.renderWeather)}</tbody> */}
+        <tbody>{this.props.weather.data.map(this.renderWeather)}</tbody>
       </table>
     );
   }
