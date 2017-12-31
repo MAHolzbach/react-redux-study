@@ -3,12 +3,15 @@ import { connect } from "react-redux";
 
 class WeatherList extends Component {
   renderWeather = cityData => {
+    const conditions =
+      cityData.forecast.simpleforecast.forecastday[0].conditions;
+    const fHigh =
+      cityData.forecast.simpleforecast.forecastday[0].high.fahrenheit;
     return (
       <tr>
-        <td>{cityData.forecast.simpleforecast.forecastday[0].conditions}</td>
-        <td>
-          {cityData.forecast.simpleforecast.forecastday[0].high.fahrenheit}
-        </td>
+        <td>{cityData.city}</td>
+        <td>{conditions}</td>
+        <td>{fHigh}</td>
       </tr>
     );
   };

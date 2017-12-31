@@ -11,6 +11,6 @@ export function fetchWeather(searchData) {
 
   return {
     type: FETCH_WEATHER,
-    payload: request
+    payload: [request, searchData.stateName, searchData.city]
   };
 }

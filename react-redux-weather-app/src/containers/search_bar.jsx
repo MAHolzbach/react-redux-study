@@ -36,6 +36,7 @@ class SearchBar extends Component {
     return (
       <form action="" className="input-group" onSubmit={this.formSubmit}>
         <input
+          required
           type="text"
           placeholder="Enter city..."
           className="form-control"
@@ -43,6 +44,7 @@ class SearchBar extends Component {
           value={this.state.city}
         />
         <input
+          required
           type="text"
           placeholder="Enter state..."
           className="form-control"
