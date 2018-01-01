@@ -5,14 +5,11 @@ class WeatherList extends Component {
   renderWeather = cityData => {
     console.log(cityData);
     let renderedTable;
-    if (cityData.data.length < 1) {
-      renderedTable = <h1>Search for a city!</h1>;
-    } else {
-      cityData.data.forEach(city => {
-        const conditions =
-          city.forecast.simpleforecast.forecastday[0].conditions;
-        const fHigh =
-          city.forecast.simpleforecast.forecastday[0].high.fahrenheit;
+    const tableMaker = cityData => {
+      console.log(cityData);
+      cityData.forecast.simpleforecast.forecastday.forEach(day => {
+        const conditions = day.conditions;
+        const fHigh = day.high.fahrenheit;
         renderedTable = (
           <tr>
             <td>{cityData.meta}</td>
@@ -21,7 +18,14 @@ class WeatherList extends Component {
           </tr>
         );
       });
+      return renderedTable;
+    };
+    if (cityData.data.length < 1) {
+      renderedTable = <h1>Search for a city!</h1>;
+    } else {
+      cityData.data.map(tableMaker);
     }
+
     return renderedTable;
   };
 
