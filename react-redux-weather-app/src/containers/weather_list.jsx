@@ -2,31 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 class WeatherList extends Component {
-  renderWeather = (weatherData, cityName) => {
-    console.log(weatherData, cityName);
-    let renderedTable;
-    const tableMaker = weatherData => {
-      console.log(weatherData);
-      weatherData.forecast.simpleforecast.forecastday.forEach(day => {
-        const conditions = day.conditions;
-        const fHigh = day.high.fahrenheit;
-        renderedTable = (
-          <tr>
-            <td>{cityName}</td>
-            <td>{conditions}</td>
-            <td>{fHigh}</td>
-          </tr>
-        );
-      });
-      return renderedTable;
-    };
-    if (weatherData.length < 1) {
-      renderedTable = <h1>Search for a city!</h1>;
-    } else {
-      weatherData.map(tableMaker);
-    }
-
-    return renderedTable;
+  renderWeather = cityData => {
+    const city = cityData.city.name;
+    return (
+      <tr key={city}>
+        <td>{city}</td>
+      </tr>
+    );
   };
 
   render() {
@@ -40,9 +22,7 @@ class WeatherList extends Component {
             <th>Humidity</th>
           </tr>
         </thead>
-        <tbody>
-          {this.renderWeather(this.props.weather.data, this.props.weather.meta)}
-        </tbody>
+        <tbody>{this.props.weather.map(this.renderWeather)}</tbody>
       </table>
     );
   }

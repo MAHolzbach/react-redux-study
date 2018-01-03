@@ -7,8 +7,7 @@ class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      city: "",
-      stateName: ""
+      city: ""
     };
   }
 
@@ -27,9 +26,9 @@ class SearchBar extends Component {
   formSubmit = event => {
     event.preventDefault();
 
-    this.props.fetchWeather(this.state);
+    this.props.fetchWeather(this.state.city);
 
-    this.setState({ city: "", stateName: "" });
+    this.setState({ city: "" });
   };
 
   render() {
@@ -42,14 +41,6 @@ class SearchBar extends Component {
           className="form-control"
           onChange={this.updateCityInput}
           value={this.state.city}
-        />
-        <input
-          required
-          type="text"
-          placeholder="Enter state..."
-          className="form-control"
-          onChange={this.updateStateNameInput}
-          value={this.state.stateName}
         />
         <button type="submit" className="btn btn-primary">
           Search!
