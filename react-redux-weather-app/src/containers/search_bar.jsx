@@ -26,6 +26,8 @@ class SearchBar extends Component {
   formSubmit = event => {
     event.preventDefault();
 
+    this.props.sendCityName(this.state.city);
+
     this.props.fetchWeather(this.state.city);
 
     this.setState({ city: "" });

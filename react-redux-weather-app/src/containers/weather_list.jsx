@@ -4,9 +4,18 @@ import Chart from "../components/chart";
 import GoogleMap from "../components/Map";
 
 class WeatherList extends Component {
+  constructor(props) {
+    super(props);
+  }
   renderWeather = cityData => {
     if (!cityData) {
-      return <h3>We couldn't find that town. Try again!</h3>;
+      return (
+        <tr key={Date.now()}>
+          <td>
+            Sorry, we couldn't find "{this.props.citySearched}". Try again!
+          </td>
+        </tr>
+      );
     } else {
       const city = cityData.city.name;
       const temps = cityData.list.map(
