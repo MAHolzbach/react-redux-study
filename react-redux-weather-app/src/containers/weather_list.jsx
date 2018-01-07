@@ -5,27 +5,32 @@ import GoogleMap from "../components/Map";
 
 class WeatherList extends Component {
   renderWeather = cityData => {
-    const city = cityData.city.name;
-    const temps = cityData.list.map(
-      weather => 9 / 5 * (weather.main.temp - 273) + 32
-    );
-    const humidity = cityData.list.map(weather => weather.main.humidity);
-    const conditions = cityData.list[0].weather[0].main;
-    const { lon, lat } = cityData.city.coord;
-    return (
-      <tr key={city}>
-        <td>
-          <GoogleMap lon={lon} lat={lat} />
-        </td>
-        <td>{conditions}</td>
-        <td>
-          <Chart data={temps} color="orange" units="F" />
-        </td>
-        <td>
-          <Chart data={humidity} color="black" units="%" />
-        </td>
-      </tr>
-    );
+    if (!cityData) {
+      return <h3>We couldn't find that town. Try again!</h3>;
+    } else {
+      const city = cityData.city.name;
+      const temps = cityData.list.map(
+        weather => 9 / 5 * (weather.main.temp - 273) + 32
+      );
+      const humidity = cityData.list.map(weather => weather.main.humidity);
+      const conditions = cityData.list[0].weather[0].main;
+      const { lon, lat } = cityData.city.coord;
+
+      return (
+        <tr key={city}>
+          <td>
+            <GoogleMap lon={lon} lat={lat} />
+          </td>
+          <td>{conditions}</td>
+          <td>
+            <Chart data={temps} color="orange" units="F" />
+          </td>
+          <td>
+            <Chart data={humidity} color="black" units="%" />
+          </td>
+        </tr>
+      );
+    }
   };
 
   render() {
@@ -44,6 +49,16 @@ class WeatherList extends Component {
     );
   }
 }
+
+WeatherList.defaultProps = {
+  cityData: {
+    city: {
+      name: "New York",
+      coord: {}
+    },
+    list: []
+  }
+};
 
 const mapStateToProps = ({ weather }) => ({
   weather
