@@ -1,5 +1,21 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import App from "./components/App";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import { BrowserRouter, Route } from "react-router-dom";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+// import reducers from "./reducers";
+import PostsIndex from "./components/PostsIndex";
+
+const createStoreWithMiddleware = applyMiddleware()(createStore);
+
+ReactDOM.render(
+  // <Provider store={createStoreWithMiddleware(reducers)}>
+  <BrowserRouter>
+    <div>
+      <Route exactpath="/" component={PostsIndex} />
+    </div>
+  </BrowserRouter>,
+  // </Provider>,
+  document.getElementById("root")
+);
